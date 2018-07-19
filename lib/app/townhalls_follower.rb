@@ -22,7 +22,14 @@ def pro_twitter
       nom = "@#{tweet.user.screen_name}" #on rajoute un "@"
       user_follow << nom
 #On enregistre les handles dans le googles spreadsheet accessible ici : https://docs.google.com/spreadsheets/d/1m5VF7W9d0NAtBSkAKh0mvJkcEaEJIA7vU-ATV7Q0iK8/edit?usp=sharing
-      session = GoogleDrive::Session.from_config("config.json")
+      session = GoogleDrive::Session.new do |config|
+      client_id = ENV['CLIENT_ID']
+      client_secret = ENV['CLIENT_SECRET']
+      scope = ENV['SCOPE']
+      refresh_token = ENV['REFRESH_TOKEN'] 
+  
+
+
       ws = session.spreadsheet_by_key("1m5VF7W9d0NAtBSkAKh0mvJkcEaEJIA7vU-ATV7Q0iK8").worksheets[0]
       i = 2
 
@@ -31,6 +38,7 @@ def pro_twitter
       ws.save
       i += 1
       end
+    end
     end
   end
 

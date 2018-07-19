@@ -109,14 +109,14 @@ require_relative 'townhalls_mailer.rb'
     array
     envoie_mail
     pro_twitter
-    end
+   end
 
 
 #On envoie tout dans un beau spreadsheet accessible ici : https://docs.google.com/spreadsheets/d/1m5VF7W9d0NAtBSkAKh0mvJkcEaEJIA7vU-ATV7Q0iK8/edit?usp=sharing
 
   def spreadsheet(hash_array)
 
-    session = GoogleDrive::Session.new|config|
+    session = GoogleDrive::Session.new do|config|
       client_id = ENV['CLIENT_ID']
       client_secret = ENV['CLIENT_SECRET']
       scope = ENV['SCOPE']
@@ -140,3 +140,4 @@ require_relative 'townhalls_mailer.rb'
       i += 1
      end
   end
+end
